@@ -113,14 +113,13 @@ function b.unittest.find_test_cases () {
 ## @param test_case - a test case function name
 function b.unittest.run_successfuly? () {
   (
-    local test_case="$1" \
-          FAILED_ASSERTIONS_BEFORE=0
+    local test_case="$1"
 
     is_function? b.unittest.setup && b.unittest.setup
     $test_case
     is_function? b.unittest.teardown && b.unittest.teardown
 
     b.unittest.double.undo_all
-    [ $_BANG_ASSERTIONS_FAILED -eq $FAILED_ASSERTIONS_BEFORE ]
+    [ $_BANG_ASSERTIONS_FAILED -eq 0 ]
   )
 }
