@@ -3,7 +3,6 @@
 _BANG_TESTFUNCS=()
 _BANG_TESTDESCS=()
 _BANG_ASSERTIONS_FAILED=0
-_BANG_ASSERTIONS_PASSED=0
 
 ## Adds test cases to be executed
 ## @param testcase - Function with assertions
@@ -25,7 +24,6 @@ function b.unittest.assert_success () {
     let _BANG_ASSERTIONS_FAILED++
     return 1
   fi
-  let _BANG_ASSERTIONS_PASSED++
   return 0
 }
 
@@ -38,7 +36,6 @@ function b.unittest.assert_error () {
     let _BANG_ASSERTIONS_FAILED++
     return 1
   fi
-  let _BANG_ASSERTIONS_PASSED++
   return 0
 }
 
@@ -55,7 +52,6 @@ function b.unittest.assert_equal () {
     let _BANG_ASSERTIONS_FAILED++
     return 1
   fi
-  let _BANG_ASSERTIONS_PASSED++
   return 0
 }
 
@@ -68,9 +64,7 @@ function b.unittest.assert_raise () {
   b.try.do "$1"
   b.catch "$2" catch_exception
   b.try.end
-  if [ $fired -eq 1 ]; then
-    let _BANG_ASSERTIONS_PASSED++
-  else
+  if [ $fired -ne 1 ]; then
     let _BANG_ASSERTIONS_FAILED++
     print_e "'$1' has not raised '$2' as expected..."
   fi
