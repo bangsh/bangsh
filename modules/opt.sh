@@ -81,7 +81,7 @@ function b.opt.required_args () {
   local i=""
   if [ $# -gt 0 ]; then
     for i in $(seq 1 $#); do
-      local opt=$(eval "echo \$$i")
+      local opt=$(eval "printf '%s' \${$i}")
       opt=$(b.opt.alias2opt "$opt")
       if b.opt.is_opt? "$opt" || b.opt.is_flag? "$opt"; then
         b.set "Bang.Opt.Required" "$(b.get Bang.Opt.Required) $opt"
@@ -96,13 +96,13 @@ function b.opt.required_args () {
 ## @param flag - Flag to be checked
 function b.opt.has_flag? () {
   local reqopt="$(b.opt.alias2opt $1)"
-  echo $(b.get "Bang.Opt.ParsedFlag") | grep -q "^$reqopt\b\| $reqopt\b"
+  printf '%s' "$(b.get "Bang.Opt.ParsedFlag")" | grep -q "^$reqopt\b\| $reqopt\b"
 }
 
 ## Returns the value of the option
 ## @param opt - Opt which value is to be returned
 function b.opt.get_opt () {
-  echo $(b.get "Bang.Opt.ParsedArg.$1")
+  printf "%s" $(b.get "Bang.Opt.ParsedArg.$1")
   b.is_set? "Bang.Opt.ParsedArg.$1"
   return $?
 }
@@ -130,11 +130,11 @@ function b.opt.show_usage () {
 function b.opt.init () {
   local -i i=1
   for (( ; $i <= $# ; i++ )); do
-    local arg=$(eval "echo \$$i")
+    local arg=$(eval "printf '%s' \${$i}")
     arg=$(b.opt.alias2opt $arg)
     if b.opt.is_opt? "$arg"; then
       local ii=$(($i + 1))
-      local nextArg=$(eval "echo \${$ii}")
+      local nextArg=$(eval "printf '%s' \${$ii}")
       if [ -z "$nextArg" ] || b.opt.is_opt? "$nextArg" || b.opt.is_flag? "$nextArg"; then
         b.raise ArgumentError "Option '$arg' requires an argument."
       else
@@ -170,10 +170,10 @@ function b.opt.check_required_args() {
 function b.opt.alias2opt () {
   local arg="$1"
   if b.is_set? "Bang.Opt.Alias.$arg"; then
-    echo $(b.get "Bang.Opt.Alias.$arg")
+    printf '%s' "$(b.get "Bang.Opt.Alias.$arg")"
     return 0
   fi
-  echo "$arg"
+  printf '%s' "$arg"
   return 1
 }
 

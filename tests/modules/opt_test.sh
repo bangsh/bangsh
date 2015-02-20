@@ -119,18 +119,53 @@ function b.test.test_usage_output () {
   b.unittest.assert_success $?
 }
 
-function b.test.test_more_than_five_options () {
-  b.opt.add_opt --opt1
-  b.opt.add_opt --opt2
-  b.opt.add_opt --opt3
-  b.opt.add_opt --opt4
-  b.opt.add_opt --opt5
+function b.test.test_multiple_options_and_aliases () {
+  b.opt.add_flag --foo "foo"
 
-  b.opt.init --opt1 one --opt2 two --opt3 three --opt4 four --opt5 five
+  b.opt.add_opt --email "Specify text to be printed"
+  b.opt.add_alias --email -e
 
-  b.unittest.assert_equal "$(b.opt.get_opt --opt1)" "one"
-  b.unittest.assert_equal "$(b.opt.get_opt --opt2)" "two"
-  b.unittest.assert_equal "$(b.opt.get_opt --opt3)" "three"
-  b.unittest.assert_equal "$(b.opt.get_opt --opt4)" "four"
-  b.unittest.assert_equal "$(b.opt.get_opt --opt5)" "five"
+  b.opt.add_opt --company "Specify text to be printed"
+  b.opt.add_alias --company -cp
+
+  b.opt.add_opt --customer "Specify text to be printed"
+  b.opt.add_alias --customer -c
+
+  b.opt.add_opt --index "Specify text to be printed"
+  b.opt.add_alias --index -i
+
+  b.opt.add_opt --port "Specify text to be printed"
+  b.opt.add_alias --port -p
+
+  b.opt.add_opt --grove "Specify text to be printed"
+  b.opt.add_alias --grove -g
+
+  b.opt.add_opt --password "Specify text to be printed"
+  b.opt.add_alias --password -ps
+
+  b.opt.add_opt --area "Specify text to be printed"
+  b.opt.add_alias --area -a
+
+  b.opt.add_opt --url "Specify text to be printed"
+  b.opt.add_alias --url -u
+
+  b.opt.add_opt --instance "Specify text to be printed"
+  b.opt.add_alias --instance -is
+
+  b.opt.init -c "groupbydemo" -cp "groupby" -i "congo" -a "Sample" -ps p@ssw0rd -e "benny@gmail.com" -g "001" \
+      -is "us-serve1-f" -p "9200" -u "http://localhost" --foo
+
+  b.unittest.assert_equal "groupby" "$(b.opt.get_opt --company)"
+  b.unittest.assert_equal "groupbydemo" "$(b.opt.get_opt --customer)"
+  b.unittest.assert_equal "congo" "$(b.opt.get_opt --index)"
+  b.unittest.assert_equal "Sample" "$(b.opt.get_opt --area)"
+  b.unittest.assert_equal "p@ssw0rd" "$(b.opt.get_opt --password)"
+  b.unittest.assert_equal "benny@gmail.com" "$(b.opt.get_opt --email)"
+  b.unittest.assert_equal "001" "$(b.opt.get_opt --grove)"
+  b.unittest.assert_equal "us-serve1-f" "$(b.opt.get_opt --instance)"
+  b.unittest.assert_equal "9200" "$(b.opt.get_opt --port)"
+  b.unittest.assert_equal "http://localhost" "$(b.opt.get_opt --url)"
+
+  b.opt.has_flag? --foo
+  b.unittest.assert_success $?
 }
