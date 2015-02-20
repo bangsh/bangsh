@@ -13,13 +13,9 @@ function b.test.task_test () {
   local has_error_output=$?
   b.unittest.assert_success $has_error_output
 
-  echo "$output" | grep -q "'b' equals to 'a'... FAIL"
+  echo "$output" | grep -q "Expected 'a', but got 'b' instead"
   local outputs_expectation=$?
   b.unittest.assert_success $outputs_expectation
-
-  echo "$output" | grep -q "Expected 'a', but it was returned 'b'"
-  local outputs_test_error=$?
-  b.unittest.assert_success $outputs_test_error
 
   b.unset 'bang.working_dir'
 }
