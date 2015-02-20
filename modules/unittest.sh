@@ -13,8 +13,7 @@ function b.unittest.add_test_case () {
 ## @param return code - return code of the command
 function b.unittest.assert_success () {
   if [ $1 -gt 0 ]; then
-    print_e "'$@'... FAIL"
-    print_e "Expected TRUE, but exit code is NOT 0"
+    print_e "Expected a success, but exit code was '$1'"
     let _BANG_ASSERTIONS_FAILED++
     return 1
   fi
@@ -25,8 +24,7 @@ function b.unittest.assert_success () {
 ## @param func_name - Name of the function
 function b.unittest.assert_error () {
   if [ $1 -eq 0 ]; then
-    print_e "'$@'... FAIL"
-    print_e "Expected FALSE, but exit code is 0"
+    print_e "Expected an error, but exit code was '0'"
     let _BANG_ASSERTIONS_FAILED++
     return 1
   fi
@@ -41,8 +39,7 @@ function b.unittest.assert_equal () {
   shift
   local result="$1"
   if [ "$val" != "$result" ]; then
-    print_e "'$@' equals to '$val'... FAIL"
-    print_e "Expected '$val', but it was returned '$result'"
+    print_e "Expected '$val', but got '$result' instead"
     let _BANG_ASSERTIONS_FAILED++
     return 1
   fi
@@ -59,8 +56,8 @@ function b.unittest.assert_raise () {
   b.catch "$2" catch_exception
   b.try.end
   if [ $fired -ne 1 ]; then
+    print_e "Expected '$2', but '$1' has not raised any exception."
     let _BANG_ASSERTIONS_FAILED++
-    print_e "'$1' has not raised '$2' as expected..."
   fi
   unset -f catch_exception
 }
