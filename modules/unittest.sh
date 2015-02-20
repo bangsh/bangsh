@@ -1,18 +1,12 @@
 ## Unit Test Framework
 
 _BANG_TESTFUNCS=()
-_BANG_TESTDESCS=()
 _BANG_ASSERTIONS_FAILED=0
 
 ## Adds test cases to be executed
 ## @param testcase - Function with assertions
-## @param description - Description of the testcase
 function b.unittest.add_test_case () {
-  if is_function? "$1"; then
-    _BANG_TESTFUNCS+=($1)
-    shift
-    _BANG_TESTDESCS+=("$@")
-  fi
+  is_function? "$1" && _BANG_TESTFUNCS+=($1)
 }
 
 ## Asserts a function exit code is zero
