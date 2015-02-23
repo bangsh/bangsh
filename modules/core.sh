@@ -167,6 +167,14 @@ function b.resolve_path () {
   return 1
 }
 
+## Loads all files matching `*.sh` under the given pathname
+## @param path - the root path
+function b.preload () {
+  for file_path in $(b.path.matching "$1" "*.sh"); do
+    source "$file_path"
+  done
+}
+
 ## Check if a given dependency is executable.
 ##
 ## In case it is not raises `DependencyNotMetException`.

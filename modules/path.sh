@@ -65,3 +65,10 @@ function b.path.older? () {
 function b.path.newer? () {
   test "$1" -nt "$2"
 }
+
+## Recursively finds files matching the given criteria
+## @param path - the root path to start the search at
+## @param criteria - a criteria to search files for
+function b.path.matching () {
+  find "$1" -name "$2"
+}
