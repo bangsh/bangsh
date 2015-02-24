@@ -21,6 +21,7 @@ b.module.require 'task'
 b.set bang.src_path "$_BANG_PATH"
 b.set bang.working_dir "$PWD"
 
+b.preload "$_BANG_PATH/tasks"
 
 task="$1"
 shift

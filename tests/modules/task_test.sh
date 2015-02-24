@@ -23,17 +23,11 @@ function b.test.it_adds_the_task_when_task_exist () {
 }
 
 function b.test.it_runs_added_tasks () {
-  function a_path () { echo "/path/to/task-$1.sh" ; }
-  b.unittest.double.do b.task.resolve_path a_path
-
-  local resolved_path="" func_runned=0
-  function source () { resolved_path="$1" ; }
+  local func_runned=0
   function btask.google.run () { func_runned=1 ; }
 
-  b.task.add 'google' 'Googles me something'
   b.task.run 'google'
 
-  b.unittest.assert_equal "/path/to/task-google.sh" "$resolved_path"
   b.unittest.assert_equal "1" "$func_runned"
 }
 

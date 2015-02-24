@@ -32,3 +32,16 @@ function b.test.path_expand () {
 
   unlink "${dir}2"
 }
+
+function b.test.path_matching () {
+  local dir="$(mktemp -d -t preload.source.XXXX)"
+  touch "$dir/file1.sh"
+  touch "$dir/file2.sh"
+  local files="$(b.path.matching "$dir" "file*")"
+
+  echo "$files" | grep -q 'file1.sh'
+  b.unittest.assert_success $?
+
+  echo "$files" | grep -q 'file2.sh'
+  b.unittest.assert_success $?
+}

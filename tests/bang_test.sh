@@ -103,3 +103,18 @@ function b.test.depends_on_returns_true_when_command_is_executable () {
 
   b.unittest.assert_true $?
 }
+
+function b.test.preload_sources_files () {
+  local dir="$(mktemp -d -t preload.source.XXXX)"
+  echo 'function this_is_a_preloaded_function () { echo ; }' > "$dir/file.sh"
+
+  declare -f this_is_a_preloaded_function &> /dev/null
+  b.unittest.assert_error $?
+
+  b.preload "$dir"
+
+  declare -f this_is_a_preloaded_function &> /dev/null
+  b.unittest.assert_success $?
+
+  rm -r "$dir"
+}
