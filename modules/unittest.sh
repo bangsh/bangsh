@@ -20,7 +20,7 @@ function b.unittest.assert_success () {
   return 0
 }
 
-## Asserts a functoin exit code is 1
+## Asserts a function exit code is 1
 ## @param func_name - Name of the function
 function b.unittest.assert_error () {
   if [ $1 -eq 0 ]; then
@@ -108,7 +108,7 @@ function b.unittest.find_test_cases () {
   declare -f | grep '^b\.test\.' | sed 's/ ().*$//'
 }
 
-## Execute and return whether a test case was run successfuly
+## Execute and return whether a test case was run successfully
 ##
 ## @param test_case - a test case function name
 function b.unittest.run_successfuly? () {

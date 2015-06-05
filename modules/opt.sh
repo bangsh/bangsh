@@ -7,7 +7,7 @@ function b.opt.reset {
 
 ## Adds an option with a description to the software
 ## @param opt - Option to be added
-## @param description - Description of th opt
+## @param description - Description of the opt
 function b.opt.add_opt () {
   local opt="Bang.Opt.Opts.$1" description="$2"
   [ -z "$1" ] && return 1
@@ -107,7 +107,7 @@ function b.opt.get_opt () {
   return $?
 }
 
-## Shows usage informations
+## Shows usage information
 function b.opt.show_usage () {
   echo -e "\nShowing usage:\n"
   local opt=""

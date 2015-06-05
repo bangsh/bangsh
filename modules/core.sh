@@ -76,8 +76,8 @@ function escape_arg () {
   echo -e "$arg"
 }
 
-## Returns the sinitized argument
-## @param arg - Argument to be sinitized
+## Returns the sanitized argument
+## @param arg - Argument to be sanitized
 function sanitize_arg () {
   local arg="$1"
   [ -z "$arg" ] && read arg
@@ -98,14 +98,14 @@ function print_e () {
   echo -e "$*" >&2
 }
 
-## Raises an error an exit the code
+## Raises an error and exit the code
 ## @param [msg ...] - Message of the error to be raised
 function b.abort () {
   print_e "The program was aborted due to an error:\n\n\t$*"
   exit 2
 }
 
-## Raises an exception that can be cautch by catch statement
+## Raises an exception that can be caught by catch statement
 ## @param exception - a string containing the name of the exception
 function b.raise () {
   local exception="$1"
