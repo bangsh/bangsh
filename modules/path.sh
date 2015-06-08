@@ -1,7 +1,7 @@
 ## Expands a given path to its full path.
-## If it has synlinks, it will be converted to the realpath.
+## If it has symlinks, it will be converted to the realpath.
 ## If it is a file, the path will also be expanded to realpath
-## It does not return a trailling '/' for directories
+## It does not return a trailing '/' for directories
 ## @param path - a path to be expanded
 function b.path.expand () {
   local _DIR="$1" _FILE=""
