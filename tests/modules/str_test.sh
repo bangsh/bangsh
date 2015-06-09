@@ -6,6 +6,17 @@ function b.test.str_replace () {
   b.unittest.assert_equal "$(b.str.replace foo ing ong)" "Testong"
   b.unittest.assert_equal "$(b.str.replace foo t X)" "TesXing"
   b.unittest.assert_equal "$(b.str.replace foo not lala)" "Testing"
+
+  local foo="TestingTestingTesting"
+  b.unittest.assert_equal "$(b.str.replace foo ing ong)" "TestongTestingTesting"
+  b.unittest.assert_equal "$(b.str.replace foo t X)" "TesXingTestingTesting"
+}
+
+function b.test.str_replace_all () {
+  local foo="TestingTestingTesting"
+  b.unittest.assert_equal "$(b.str.replace_all foo ing ong)" "TestongTestongTestong"
+  b.unittest.assert_equal "$(b.str.replace_all foo t X)" "TesXingTesXingTesXing"
+  b.unittest.assert_equal "$(b.str.replace_all foo not lala)" "TestingTestingTesting"
 }
 
 function b.test.str_part () {

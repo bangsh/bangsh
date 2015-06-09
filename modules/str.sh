@@ -1,10 +1,19 @@
-## Replaces a given string to another in a string variable
+## Replaces first occurence of a given string to another in a string variable
 ## @param varname - the name of the variable
 ## @param search - the string to be searched
 ## @param replace - the string to be replaced by
 function b.str.replace {
   local varname="$(eval echo \$$1)" search="$2" replace="$3"
   echo ${varname/$search/$replace}
+}
+
+## Replaces all occurences of a given string to another in a string variable
+## @param varname - the name of the variable
+## @param search - the string to be searched
+## @param replace - the string to be replaced by
+function b.str.replace_all {
+  local varname="$(eval echo \$$1)" search="$2" replace="$3"
+  echo ${varname//$search/$replace}
 }
 
 ## Returns a part of the string. If no length is given,
