@@ -1,0 +1,23 @@
+NAME
+  bang - Bash4 Framework for easy script creation
+
+SYNOPSIS
+  bang <command> <arguments>
+
+DESCRIPTION
+  This is a set of utility commands to ease bang.sh project creation and development.
+
+BANG COMMANDS
+
+new  creates a new bang project
+run  runs a file with the bang environment loaded
+test  runs test files of the current's path project
+
+EXAMPLES
+  bang run todo.sh
+
+SEE ALSO
+  bang-new(1) bang-run(1) bang-test(1)
+
+AUTHOR
+  Gustavo Dutra <gustavotkg@gmail.com>

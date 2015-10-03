@@ -1,0 +1,26 @@
+NAME
+  bang - Bash4 Framework for easy script creation
+
+SYNOPSIS
+  bang new [path/to/project_name|project_name]
+
+DESCRIPTION
+  Creates the bare structure for a new bang project in the
+  given path or in the current directory if only the name is given.
+
+  It crates a structure like this:
+
+  my_project*  Your project's executable
+  modules/     where script modules will be placed
+  tasks/       where bang tasks will be placed
+  tests/       where your unit tests will be placed
+
+EXAMPLES
+  bang new my_project
+  bang new /opt/my_project
+
+SEE ALSO
+  bang(1) bang-test(1) bang-run(1)
+
+AUTHOR
+  Gustavo Dutra <gustavotkg@gmail.com>

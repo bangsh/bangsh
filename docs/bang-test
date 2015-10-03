@@ -1,0 +1,23 @@
+NAME
+  bang - Bash4 Framework for easy script creation
+
+SYNOPSIS
+  bang test [test_file1 test_file2 test_dir1 test_dir2 ...]
+
+DESCRIPTION
+  For each file given and files in the directories given
+  runs the test functions and print their output.
+
+  If no file or directory is passed to the `test` task,
+  it runs all files under `test/` directory.
+
+EXAMPLES
+  bang test test/my_test.sh
+  bang test test/my_test.sh test/modules
+  bang test test/modules/*sh
+
+SEE ALSO
+  bang(1) bang-new(1) bang-run(1)
+
+AUTHOR
+  Gustavo Dutra <gustavotkg@gmail.com>

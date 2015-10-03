@@ -1,0 +1,18 @@
+NAME
+  bang - Bash4 Framework for easy script creation
+
+SYNOPSIS
+  bang [run] <file>
+
+DESCRIPTION
+  Runs the given file with the bang environment loaded.
+
+EXAMPLES
+  bang todo.sh
+  bang run todo.sh
+
+SEE ALSO
+  bang(1) bang-new(1) bang-test(1)
+
+AUTHOR
+  Gustavo Dutra <gustavotkg@gmail.com>
