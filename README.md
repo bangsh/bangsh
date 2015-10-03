@@ -9,19 +9,12 @@ your code in functions, so that your program can be tested.
 
 # Installation
 
-You can clone the bang repository in any path. For instance,
+You can clone the bang repository in any path and run `make install`. For instance,
 
 ```bash
-cd /usr/local/
 git clone git://github.com/bangsh/bangsh.git
-```
-
-You can `cd bangsh` and then `bin/bang test`. It will run all test suites.
-If all tests pass, you're good to go. In order to have a better experience,
-add the `bin/` path to your `$PATH` environment variable, something like:
-
-```bash
-export PATH="$PATH:/usr/local/bangsh/"
+cd bangsh
+sudo make prefix=/usr/local install
 ```
 
 # Hello World
