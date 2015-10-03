@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 
 _BANG_PATH=$(
-  BIN_PATH="$0"
-  if [ -L "$BIN_PATH" ]; then
-    BIN_PATH=$(readlink "$BIN_PATH")
+  if [ -n "$BANG_SRC_PATH" ]; then
+    # If there is a src path stablished, then use it
+    echo "$BANG_SRC_PATH"
+  else
+    # otherwise, lookup for the current directory
+    BIN_PATH="$0"
+    if [ -L "$BIN_PATH" ]; then
+      BIN_PATH=$(readlink "$BIN_PATH")
+    fi
+    (
+      cd $(dirname "$BIN_PATH") > /dev/null
+      echo -n "$PWD"
+    )
   fi
-  (
-    cd $(dirname "$BIN_PATH") > /dev/null
-    echo -n "$PWD"
-  )
 )
 
 . "$_BANG_PATH/modules/core.sh"
