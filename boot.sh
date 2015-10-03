@@ -187,3 +187,32 @@ function b.depends_on () {
     return 1
   fi
 }
+
+function b._load_bang_env () {
+  local app_path="$1"
+
+  b.set bang.src_path "$app_path"
+
+  . "$app_path/modules/module.sh"
+  b.module.require 'opt'
+  b.module.require 'path'
+  b.module.require 'str'
+  b.module.require 'task'
+
+  b.preload "$app_path/tasks"
+}
+
+function b._run () {
+  local task="${1:-run}"
+
+  b.set bang.working_dir "$PWD"
+
+  if b.path.executable? "$task"
+  then
+    task="run"
+  else
+    shift
+  fi
+
+  b.task.run $task "$@"
+}
