@@ -1,5 +1,3 @@
-b.module.require unittest
-
 # # Running tests
 #
 # Run tests that follows `unittest` standards. The standard is the following:
